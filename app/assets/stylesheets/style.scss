@@ -1,2 +1,8 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
+
+footer{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
