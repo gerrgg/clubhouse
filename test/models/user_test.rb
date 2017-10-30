@@ -38,9 +38,9 @@ class UserTest < ActiveSupport::TestCase
     assert_not @user.valid?
   end
 
-  test "valid email" do
-    assert @user.valid?
-  end
+  # test "valid email" do
+  #   assert @user.valid?
+  # end
 
 
 end

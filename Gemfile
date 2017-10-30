@@ -7,6 +7,7 @@ end
 
 gem 'minitest', '~> 5.10', '>= 5.10.3'
 gem 'bootstrap-sass', '~> 3.3', '>= 3.3.7'
+gem 'jquery-rails'
 gem 'bcrypt', '~> 3.1', '>= 3.1.11'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.4'
