@@ -62,4 +62,10 @@ class UserTest < ActiveSupport::TestCase
     assert_equal @user.email.downcase, @user.email
   end
 
+  test "names are titleized before creation" do
+    @user.name.downcase!
+    @user.save
+    assert_equal @user.name.titleize, @user.reload.name
+  end
+
 end
