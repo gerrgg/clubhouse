@@ -25,6 +25,7 @@ class UsersLoginTestTest < ActionDispatch::IntegrationTest
     end
     follow_redirect!
     assert_template 'users/show'
+    assert flash[:success] = "Welcome to the clubhouse, Example User."
     assert is_logged_in?
   end
 end
