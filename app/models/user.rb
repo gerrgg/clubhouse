@@ -34,6 +34,11 @@ class User < ApplicationRecord
     update_attribute(:remember_digest, User.digest(remember_token))
   end
 
+  def authenticated?(remember_token) #pass token from cookies
+    return false if remember_digest.nil? #skip next line
+    BCrypt::Password.new(remember_digest).is_password?(remember_token) #compare passed token and compare to digest
+  end
+
 
 
   private
