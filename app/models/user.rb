@@ -1,6 +1,8 @@
 
 class User < ApplicationRecord
+  attr_accessor :remember_token
   before_save :formalize_user
+
 
   validates :name, presence: true
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
@@ -14,11 +16,25 @@ class User < ApplicationRecord
   has_secure_password
 
   #returns the hash digest of the given string
-  def User.digest(string)
+  def self.digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
                                                   BCrypt::Engine.cost
     BCrypt::Password.create(string, cost: cost)
   end
+
+  def self.new_token
+    SecureRandom.urlsafe_base64
+  end
+
+  def remember
+    #use self to create a token specific to *this* user
+    self.remember_token = User.new_token
+    #digest the token and store it into db for comparison
+    # requires the attribute to be accessisble via attr_accessor
+    update_attribute(:remember_digest, User.digest(remember_token))
+  end
+
+
 
   private
 

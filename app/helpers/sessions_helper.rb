@@ -19,4 +19,11 @@ module SessionsHelper
     !current_user.nil?
   end
 
+  def remember(user) ##pulls in user model, puts it in user var
+    user.remember # remember method in the user model
+    cookies.permanent.signed[:user_id] = user.id
+    cookies.permanent.signed[:remember_token] = user.remember_token
+  end
+
+
 end
