@@ -23,27 +23,25 @@ class User < ApplicationRecord
   end
 
   def self.new_token
+    #create token
     SecureRandom.urlsafe_base64
   end
 
   def remember
-    #use self to create a token specific to *this* user
+    # first create a token
     self.remember_token = User.new_token
-    #digest the token and store it into db for comparison
-    # requires the attribute to be accessisble via attr_accessor
+    # and we digest that token and store it in the db for comparison
     update_attribute(:remember_digest, User.digest(remember_token))
   end
 
   def forget
-    update_attribute(:remember_digest, nil)
+    update_attribute(:remember_digest, :nil)
   end
 
-  def authenticated?(remember_token) #pass token from cookies
-    return false if remember_digest.nil? #skip next line
-    BCrypt::Password.new(remember_digest).is_password?(remember_token) #compare passed token and compare to digest
+  def authenticated?(remember_token)
+    return false if remember_digest.nil?
+    BCrypt::Password.new(remember_digest).is_password?(remember_token)
   end
-
-
 
   private
 
@@ -51,6 +49,7 @@ class User < ApplicationRecord
     self.email.downcase!
     self.name = self.name.titleize
   end
+
 
 
 
