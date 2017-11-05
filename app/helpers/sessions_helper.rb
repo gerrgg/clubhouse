@@ -30,6 +30,12 @@ module SessionsHelper
     cookies.permanent.signed[:user_id] = user.id
     cookies.permanent.signed[:remember_token] = user.remember_token
   end
-
+  # has only to do with the session part of the user
+  # requires a forget method in model to handle the attribute
+  def forget(user)
+    user.forget
+    cookies.delete :user_id
+    cookies.delete :remember_token
+  end
 
 end
