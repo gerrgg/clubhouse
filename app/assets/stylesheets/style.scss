@@ -28,3 +28,12 @@ footer{
  .checkbox{
    margin-left: 20px;
  }
+
+ .profile-pic{
+   @extend .thumbnail;
+   margin: 0px 10px;
+ }
+ ul.users li{
+   margin: 5px 0;
+   list-style: none;
+ }

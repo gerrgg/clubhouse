@@ -2,6 +2,9 @@
 
 <div class="row">
   <div class="col-md-8 col-md-offset-2">
+    <div class="pull-left">
+      <%= image_tag gravatar_url(@user.email, 64), alt: "", class: 'profile-pic' %>
+    </div>
     <h1><%= @user.name %></h1>
     <p class="text-muted">
       <%= @user.email %>
