@@ -2,6 +2,7 @@
 class User < ApplicationRecord
   attr_accessor :remember_token
   before_save :formalize_user
+  before_create :create_activation_digest
 
 
   validates :name, presence: true
@@ -27,6 +28,10 @@ class User < ApplicationRecord
     SecureRandom.urlsafe_base64
   end
 
+  def send_activation_email
+    update_attribute(self.digest(self.new_token))
+  end
+
   def remember
     # first create a token
     self.remember_token = User.new_token
@@ -48,6 +53,10 @@ class User < ApplicationRecord
   def formalize_user
     self.email.downcase!
     self.name = self.name.titleize
+  end
+
+  def create_activation_digest
+    
   end
 
 
