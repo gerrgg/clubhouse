@@ -1,0 +1,11 @@
+<% provide(:title, "Confirmation Email") %>
+
+<div class="row">
+  <div class="col-sm-6 col-sm-offset-3">
+    <%= form_for :account_activations, url: account_activations_path do |f| %>
+      <%= f.label :email %>
+      <%= f.email_field :email, class: 'form-control' %>
+      <%= f.submit %>
+    <% end %>
+  </div>
+</div>

@@ -9,7 +9,7 @@ class UsersController < ApplicationController
     if @user.save
       @user.send_activation_email
       flash[:warning] = "Account not activated, please check email."
-      redirect_to root
+      redirect_to root_path
     else
       render 'new'
     end
