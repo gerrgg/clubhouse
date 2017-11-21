@@ -2,3 +2,5 @@ ron:
   name: Ron Bastianelli
   email: ron@example.com
   password_digest: <%= User.digest('password') %>
+  activated: true
+  activated_at: <%= Time.now %>

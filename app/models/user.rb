@@ -54,16 +54,21 @@ class User < ApplicationRecord
                            activated_at: Time.now)
   end
 
-  private
-
-  def formalize_user
-    self.email.downcase!
-    self.name = self.name.titleize
+  def update_activation_digest
+    self.activation_token = User.new_token
+    self.update_attribute(:activation_digest, User.digest(activation_token))
   end
+
+  private
 
   def create_activation_digest
     self.activation_token = User.new_token
     self.activation_digest = User.digest(activation_token)
+  end
+
+  def formalize_user
+    self.email.downcase!
+    self.name = self.name.titleize
   end
 
 end

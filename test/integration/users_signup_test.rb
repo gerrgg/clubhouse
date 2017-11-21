@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class UsersLoginTestTest < ActionDispatch::IntegrationTest
+class UsersSignupTest < ActionDispatch::IntegrationTest
   test "invalid info" do
     assert_no_difference 'User.count' do
       post users_path, params: { user: { name: "",
@@ -24,8 +24,8 @@ class UsersLoginTestTest < ActionDispatch::IntegrationTest
                                          password_confirmation: "password" } }
     end
     follow_redirect!
-    assert_template 'users/show'
-    assert flash[:success] = "Welcome to the clubhouse, Example User."
-    assert is_logged_in?
+    assert flash[:warning] = "Account not activated, please check email."
+    assert_not is_logged_in?
+
   end
 end
